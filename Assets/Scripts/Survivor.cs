@@ -2,22 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
+using Random = UnityEngine.Random;
 
 public class Survivor : MonoBehaviour
 {
     private int health = 1000;
     private Transform gun;
     [SerializeField] private LayerMask zombielayer;
+    [SerializeField] private Material black;
+    [SerializeField] private Material red;
 
     private void Awake()
     {
-        gun = GetComponentInChildren<Transform>();
+        gun = transform.GetChild(0);
     }
 
     private void Update()
     {
         List<Zombie> zombiethatIWillShoot = zombieIsee();
+        shootzombie(zombiethatIWillShoot[0]);
     }
+
+    void shootzombie(Zombie zom)
+    {
+        gun.GetComponent<MeshRenderer>().material = black;
+        var position = zom.transform.position;
+        transform.LookAt(new Vector3(position.x,transform.position.y,position.z));
+
+        if (Random.Range(0, 100) > 90)
+        {
+            gun.GetComponent<MeshRenderer>().material = red;
+            zom.takeDamage(1);
+        }
+        
+    }
+    
 
     private List<Zombie> zombieIsee()
     {
@@ -25,12 +45,11 @@ public class Survivor : MonoBehaviour
         for (int i = 0; i < Game_Mannger.Instance.Zombies.Count; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(gun.position, Game_Mannger.Instance.Zombies[i].transform.position-transform.position, out hit , 1000))
+            if (Physics.Raycast(gun.position, Game_Mannger.Instance.Zombies[i].transform.position-gun.position, out hit , 1000))
             {
                 if(1<<hit.transform.gameObject.layer == zombielayer )
                     _zombiesIsee.Add(hit.transform.GetComponent<Zombie>());
             }
-            
         }
 
         return _zombiesIsee;
@@ -52,7 +71,7 @@ public class Survivor : MonoBehaviour
 
         for (int i = 0; i < zombiethatIWillShoot.Count; i++)
         {
-            Gizmos.DrawLine(transform.position,zombiethatIWillShoot[i].transform.position);
+            Gizmos.DrawLine(gun.position,zombiethatIWillShoot[i].transform.position);
         }
     }
 }
