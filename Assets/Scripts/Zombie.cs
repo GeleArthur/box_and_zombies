@@ -13,33 +13,42 @@ public class Zombie : MonoBehaviour
     [SerializeField]
     float MaxDist = 10;
     [SerializeField]
-    float MinDist = 5;
-    
+    float MinDist = 3;
+    Rigidbody rb;
 
-
+    float dmgTimer = 0;
     
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         transform.LookAt(Player);
 
-        if (Vector3.Distance(transform.position, Player.position) >= MinDist)
-        {
+       
             
-            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+           
 
+             rb.MovePosition(transform.position + transform.forward * MoveSpeed * Time.deltaTime);
 
-
-            if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
+            if (Vector3.Distance(transform.position, Player.position) <= MinDist )
             {
-                //Here Call any function U want Like Shoot at here or something
+            Debug.Log("hello");
+                if (dmgTimer <= 0)
+                {
+                    Player.GetComponent<Surviver>().takeDamage(100);
+                    dmgTimer = 2;
+                }
+                else
+                {
+                    dmgTimer -= Time.deltaTime;
+                }
+                
             }
 
-        }
+        
         
     }
 
