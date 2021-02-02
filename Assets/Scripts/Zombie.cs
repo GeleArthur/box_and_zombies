@@ -15,4 +15,10 @@ public class Zombie : MonoBehaviour
     {
         
     }
+
+
+    public void takeDamage(int damage)
+    {
+
+    }
 }
