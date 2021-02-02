@@ -17,7 +17,8 @@ public class Zombie : MonoBehaviour
     Rigidbody rb;
 
     float dmgTimer = 0;
-    
+    [SerializeField] private LayerMask zombielayer;
+    [SerializeField] private LayerMask survivorLayer;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,18 +28,32 @@ public class Zombie : MonoBehaviour
     {
         transform.LookAt(Player);
 
+
+        RaycastHit hit;
+        Physics.Raycast(transform.position, transform.forward, out hit, 1000);
+
+
+            if (hit.transform.GetComponent<Survivor>() || hit.transform.GetComponent<Zombie>())
+        {
+                rb.MovePosition(transform.position + transform.forward * MoveSpeed * Time.deltaTime);
+        }
+        else
+        {
+                rb.MovePosition(transform.position + new Vector3(1,0,0) * MoveSpeed * Time.deltaTime);
+        }
+            
        
             
-           
+        
 
-             rb.MovePosition(transform.position + transform.forward * MoveSpeed * Time.deltaTime);
+             
 
             if (Vector3.Distance(transform.position, Player.position) <= MinDist )
             {
-            Debug.Log("hello");
+           
                 if (dmgTimer <= 0)
                 {
-                    Player.GetComponent<Surviver>().takeDamage(100);
+                    Player.GetComponent<Survivor>().takeDamage(100);
                     dmgTimer = 2;
                 }
                 else
