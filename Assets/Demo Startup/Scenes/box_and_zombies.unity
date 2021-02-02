@@ -496,16 +496,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  Player: {fileID: 0}
-  MoveSpeed: 4
-  MaxDist: 10
-  MinDist: 3
-  zombielayer:
-    serializedVersion: 2
-    m_Bits: 0
-  survivorLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!54 &972672909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1082,7 +1072,6 @@ GameObject:
   - component: {fileID: 1754220045}
   - component: {fileID: 1754220044}
   - component: {fileID: 1754220043}
-  - component: {fileID: 1754220042}
   - component: {fileID: 1754220047}
   m_Layer: 11
   m_Name: zombie
@@ -1091,29 +1080,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1754220042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754220041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bebc2df5a55264e8748d081ada2e90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  Player: {fileID: 1418107910}
-  MoveSpeed: 4
-  MaxDist: 10
-  MinDist: 5
-  zombielayer:
-    serializedVersion: 2
-    m_Bits: 0
-  survivorLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!136 &1754220043
 CapsuleCollider:
   m_ObjectHideFlags: 0
