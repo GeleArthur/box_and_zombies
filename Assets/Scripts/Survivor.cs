@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Surviver : MonoBehaviour
+public class Survivor : MonoBehaviour
 {
     private int health = 1000;
     private Transform gun;
