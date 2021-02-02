@@ -19,6 +19,6 @@ public class Zombie : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-
+        Debug.Log("got hit for "+ damage);
     }
 }
