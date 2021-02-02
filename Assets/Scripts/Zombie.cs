@@ -38,7 +38,7 @@ public class Zombie : MonoBehaviour
             Debug.Log("hello");
                 if (dmgTimer <= 0)
                 {
-                    Player.GetComponent<Surviver>().takeDamage(100);
+                    Player.GetComponent<Survivor>().takeDamage(100);
                     dmgTimer = 2;
                 }
                 else
