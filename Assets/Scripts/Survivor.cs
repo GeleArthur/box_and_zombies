@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Survivor : MonoBehaviour
 {
+    private int health = 1000;
     private Transform gun;
     [SerializeField] private LayerMask zombielayer;
     
@@ -19,6 +20,14 @@ public class Survivor : MonoBehaviour
         if (Physics.Raycast(gun.position, gun.forward, out hit , 1000, zombielayer))
         {
             hit.transform.GetComponent<Zombie>().takeDamage(10);
+        }
+    }
+    public void takeDamage(int Damage)
+    {
+        health -= Damage;
+        if (health <= 0)
+        {
+            Debug.Log("Survior is dead");
         }
     }
 }
