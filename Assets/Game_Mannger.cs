@@ -12,6 +12,8 @@ public class Game_Mannger : MonoBehaviour
     // Zombie data
     public List<Zombie> Zombies;
     public Survivor survivor;
+    
+    
 
     private void Awake()
     {
@@ -22,8 +24,18 @@ public class Game_Mannger : MonoBehaviour
         } else {
             _instance = this;
         }
+    }
 
+    private void Start()
+    {
         Zombies = new List<Zombie>();
+        Zombies.AddRange(FindObjectsOfType<Zombie>());
+        survivor = FindObjectOfType<Survivor>();
+
+        if (survivor == null)
+        {
+            // spawn survior
+        }
         
     }
 }
