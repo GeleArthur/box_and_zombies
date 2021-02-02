@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Surviver : MonoBehaviour
+public class Survivor : MonoBehaviour
 {
     private Transform gun;
     [SerializeField] private LayerMask zombielayer;
