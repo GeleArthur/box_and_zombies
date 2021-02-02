@@ -9,17 +9,10 @@ public class CameraControl : MonoBehaviour
     public float minSize = 6.5f;
     public Transform[] targets;
 
-    private Camera camera;
+   [SerializeField] private   Camera camera;
     private float zoomSpeed;
     private Vector3 moveVelocity;
     private Vector3 desiredPosition;
-
-    private void Awake()
-    {
-        camera = GetComponentInChildren<Camera>();
-    }
-
-
 
 
     private void FixedUpdate()
