@@ -14,7 +14,7 @@ public class Zombie : MonoBehaviour
     float MaxDist = 10;
     [SerializeField]
     float MinDist = 3;
-    Rigidbody rb;
+    protected Rigidbody rb;
 
     float dmgTimer = 0;
     [SerializeField] private LayerMask zombielayer;
@@ -27,44 +27,31 @@ public class Zombie : MonoBehaviour
     void Update()
     {
         transform.LookAt(Player);
-
-
+        
         RaycastHit hit;
         Physics.Raycast(transform.position, transform.forward, out hit, 1000);
-
-
-            if (hit.transform.GetComponent<Survivor>() || hit.transform.GetComponent<Zombie>())
+        
+        if (hit.transform.GetComponent<Survivor>() || hit.transform.GetComponent<Zombie>())
         {
-                rb.MovePosition(transform.position + transform.forward * MoveSpeed * Time.deltaTime);
+            rb.MovePosition(transform.position + transform.forward * MoveSpeed * Time.deltaTime);
         }
         else
         {
-                rb.MovePosition(transform.position + new Vector3(1,0,0) * MoveSpeed * Time.deltaTime);
+            rb.MovePosition(transform.position + new Vector3(1,0,0) * MoveSpeed * Time.deltaTime);
         }
-            
-       
-            
         
-
-             
-
-            if (Vector3.Distance(transform.position, Player.position) <= MinDist )
+        if (Vector3.Distance(transform.position, Player.position) <= MinDist)
+        {
+            if (dmgTimer <= 0)
             {
-           
-                if (dmgTimer <= 0)
-                {
-                    Player.GetComponent<Survivor>().takeDamage(100);
-                    dmgTimer = 2;
-                }
-                else
-                {
-                    dmgTimer -= Time.deltaTime;
-                }
-                
+                Player.GetComponent<Survivor>().takeDamage(100);
+                dmgTimer = 2;
             }
-
-        
-        
+            else
+            {
+                dmgTimer -= Time.deltaTime;
+            }
+        }
     }
 
 
