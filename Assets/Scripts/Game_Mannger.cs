@@ -9,10 +9,13 @@ public class Game_Mannger : MonoBehaviour
     private static Game_Mannger _instance;
     public static Game_Mannger Instance => _instance;
     
+    [Header("world data")]
     // Zombie data
     public List<Zombie> Zombies;
     public Survivor survivor;
     
+    [Header("Holders")]
+    public GameObject ZombieHolder;
     
 
     private void Awake()
@@ -24,6 +27,8 @@ public class Game_Mannger : MonoBehaviour
         } else {
             _instance = this;
         }
+
+        if (ZombieHolder == null) ZombieHolder = new GameObject("ZombieHolder");
     }
 
     private void Start()
