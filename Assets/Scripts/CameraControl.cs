@@ -9,12 +9,17 @@ public class CameraControl : MonoBehaviour
     public float minSize = 6.5f;
     public Transform[] targets;
 
-   [SerializeField] private   Camera camera;
+    private Camera _camera;
     private float zoomSpeed;
     private Vector3 moveVelocity;
     private Vector3 desiredPosition;
 
+    private void Awake()
+    {
+        _camera = GetComponentInChildren<Camera>();
+    }
 
+    
     private void FixedUpdate()
     {
         Move();
@@ -55,7 +60,7 @@ public class CameraControl : MonoBehaviour
     private void Zoom()
     {
         float requiredSize = FindRequiredSize();
-        camera.orthographicSize = Mathf.SmoothDamp(camera.orthographicSize, requiredSize, ref zoomSpeed, dampTime);
+        _camera.orthographicSize = Mathf.SmoothDamp(_camera.orthographicSize, requiredSize, ref zoomSpeed, dampTime);
     }
 
     private float FindRequiredSize()
@@ -70,7 +75,7 @@ public class CameraControl : MonoBehaviour
             Vector3 targetLocalPos = transform.InverseTransformPoint(targets[i].position);
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
             size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.y));
-            size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / camera.aspect);
+            size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / _camera.aspect);
 
         }
 

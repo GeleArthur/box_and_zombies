@@ -21,7 +21,8 @@ public class Survivor : MonoBehaviour
     private void Update()
     {
         List<Zombie> zombiethatIWillShoot = zombieIsee();
-        shootzombie(zombiethatIWillShoot[0]);
+        if(zombiethatIWillShoot.Count != 0)
+            shootzombie(zombiethatIWillShoot[0]);
     }
 
     void shootzombie(Zombie zom)

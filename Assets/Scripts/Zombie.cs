@@ -1,59 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Zombie : MonoBehaviour
 {
-    [SerializeField]
+    [Header("Public")]
+    public Transform postoWalkTo;
     public float health = 100;
-    [SerializeField]
-    public Transform Player;
-    [SerializeField]
-    float MoveSpeed = 4;
-    [SerializeField]
-    float MaxDist = 10;
-    [SerializeField]
-    float MinDist = 3;
-    protected Rigidbody rb;
+    public float MoveForce = 10f;
+    public float RangeOfNextPath = 5f;
 
-    float dmgTimer = 0;
-    [SerializeField] private LayerMask zombielayer;
-    [SerializeField] private LayerMask survivorLayer;
-    void Start()
+    [Header("Compontes")]
+    private NavMeshPath navPath;
+    private Rigidbody rb;
+    
+    [Header("privates")]
+    private int waypointCount = 1;
+
+    private void Start()
     {
+        navPath = new NavMeshPath();
         rb = GetComponent<Rigidbody>();
     }
-
-    void Update()
-    {
-        transform.LookAt(Player);
-        
-        RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit, 1000);
-        
-        if (hit.transform.GetComponent<Survivor>() || hit.transform.GetComponent<Zombie>())
-        {
-            rb.MovePosition(transform.position + transform.forward * MoveSpeed * Time.deltaTime);
-        }
-        else
-        {
-            rb.MovePosition(transform.position + new Vector3(1,0,0) * MoveSpeed * Time.deltaTime);
-        }
-        
-        if (Vector3.Distance(transform.position, Player.position) <= MinDist)
-        {
-            if (dmgTimer <= 0)
-            {
-                Player.GetComponent<Survivor>().takeDamage(100);
-                dmgTimer = 2;
-            }
-            else
-            {
-                dmgTimer -= Time.deltaTime;
-            }
-        }
-    }
-
 
     public void takeDamage(int damage)
     {
@@ -65,6 +36,45 @@ public class Zombie : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    private void FixedUpdate()
+    {
+        //TODO should be in fixedupdate
+        rb.AddForce(GoToPoint());
+    }
+    
+    
+
+    private Vector3 GoToPoint()
+    {
+        //TODO should not happen every frame
+        if (!NavMesh.CalculatePath(transform.position, postoWalkTo.position, NavMesh.AllAreas, navPath))
+            Debug.Log("goal is out of reach");
+        waypointCount = 1;
+        
+        if(navPath.corners.Length == 0) return Vector3.zero;
+
+        if ((transform.position - navPath.corners[waypointCount]).magnitude < RangeOfNextPath)
+        {
+            if(navPath.corners.Length <= waypointCount)
+                waypointCount++;
+        }
+        
+        //Debug.Log(navPath.corners[waypointCount].removeY() - transform.position.removeY());
+
+        return (navPath.corners[waypointCount].removeY() - transform.position.removeY() ).normalized*MoveForce;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (navPath.corners.Length == 0) return;
+        
+        for (int i = 0; i < navPath.corners.Length; i++)
+        {
+            Handles.DrawSolidDisc(navPath.corners[i],Vector3.up, 0.25f);
+        }
+        
+        Gizmos.DrawRay(transform.position.removeY(), (navPath.corners[waypointCount].removeY() - transform.position.removeY()).normalized*MoveForce);
     }
 }
