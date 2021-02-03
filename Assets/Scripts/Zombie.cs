@@ -16,7 +16,6 @@ public class Zombie : MonoBehaviour
     [Header("Compontes")]
     private NavMeshPath navPath;
     private Rigidbody rb;
-    
     [Header("privates")]
     private int waypointCount = 1;
 
@@ -24,11 +23,11 @@ public class Zombie : MonoBehaviour
     {
         navPath = new NavMeshPath();
         rb = GetComponent<Rigidbody>();
+
     }
 
     public void takeDamage(int damage)
     {
-
         Debug.Log("got hit for "+ damage);
 
         health -= damage;
@@ -40,7 +39,6 @@ public class Zombie : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //TODO should be in fixedupdate
         rb.AddForce(GoToPoint());
     }
     
@@ -52,6 +50,8 @@ public class Zombie : MonoBehaviour
         if (!NavMesh.CalculatePath(transform.position, postoWalkTo.position, NavMesh.AllAreas, navPath))
             Debug.Log("goal is out of reach");
         waypointCount = 1;
+
+        
         
         if(navPath.corners.Length == 0) return Vector3.zero;
 
@@ -60,14 +60,13 @@ public class Zombie : MonoBehaviour
             if(navPath.corners.Length <= waypointCount)
                 waypointCount++;
         }
-        
-        //Debug.Log(navPath.corners[waypointCount].removeY() - transform.position.removeY());
 
         return (navPath.corners[waypointCount].removeY() - transform.position.removeY() ).normalized*MoveForce;
     }
 
     private void OnDrawGizmos()
     {
+        if(navPath == null) return;
         if (navPath.corners.Length == 0) return;
         
         for (int i = 0; i < navPath.corners.Length; i++)
