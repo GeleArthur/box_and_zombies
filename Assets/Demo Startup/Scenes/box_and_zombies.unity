@@ -304,6 +304,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postoWalkTo: {fileID: 548986838}
   health: 100
+  MoveForce: 10
+  RangeOfNextPath: 5
 --- !u!54 &348901105
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -432,6 +434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postoWalkTo: {fileID: 548986838}
   health: 100
+  MoveForce: 10
+  RangeOfNextPath: 5
 --- !u!54 &494307441
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -585,14 +589,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694986083}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 9.68, z: -4.86}
+  m_LocalRotation: {x: 0.2961981, y: 0.46984634, z: -0.17101005, w: 0.8137977}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 957510501}
   m_Father: {fileID: 0}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 60, z: 0}
 --- !u!1 &838097564
 GameObject:
   m_ObjectHideFlags: 1
@@ -690,7 +694,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 10
   orthographic: 1
   orthographic size: 5
   m_Depth: -1
@@ -716,7 +720,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957510498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 694986085}
@@ -871,6 +875,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postoWalkTo: {fileID: 548986838}
   health: 100
+  MoveForce: 10
+  RangeOfNextPath: 5
 --- !u!54 &972672909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1370,6 +1376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postoWalkTo: {fileID: 548986838}
   health: 100
+  MoveForce: 10
+  RangeOfNextPath: 5
 --- !u!54 &1381166112
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1708,6 +1716,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postoWalkTo: {fileID: 548986838}
   health: 100
+  MoveForce: 10
+  RangeOfNextPath: 5
 --- !u!54 &1888541535
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1836,6 +1846,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postoWalkTo: {fileID: 548986838}
   health: 100
+  MoveForce: 10
+  RangeOfNextPath: 5
 --- !u!54 &1921924912
 Rigidbody:
   m_ObjectHideFlags: 0
