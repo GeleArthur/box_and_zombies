@@ -8,14 +8,13 @@ using Random = UnityEngine.Random;
 public class Survivor : MonoBehaviour
 {
     private int health = 1000;
-    private Transform gun;
     [SerializeField] private LayerMask zombielayer;
     [SerializeField] private List<Zombie> _zombiesIsee;
+    [SerializeField] private Animator gun;
 
     private void Awake()
     {
-        gun = transform.GetChild(0);
-        //StartCoroutine(ShootZombieEnum());
+        StartCoroutine(ShootZombieEnum());
     }
 
     IEnumerator ShootZombieEnum()
@@ -40,6 +39,7 @@ public class Survivor : MonoBehaviour
         Zombie zom = zombieIsee();
         if(zom == null) return;
         Debug.Log("shoot " + zom.name);
+        gun.SetTrigger("shoot");
 
         var position = zom.transform.position;
         transform.LookAt(new Vector3(position.x,transform.position.y,position.z));

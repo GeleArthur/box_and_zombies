@@ -33,6 +33,7 @@ public class Zombie : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            Game_Mannger.Instance.removeZombieFromList(this);
             Destroy(gameObject);
         }
     }

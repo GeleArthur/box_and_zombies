@@ -7,11 +7,18 @@ using UnityEngine.AI;
 public class InputTargetCamera : MonoBehaviour
 {
     private Vector3 centerofZombies;
-    private Vector3 input;
+    private Vector3 InputplusCamera;
     
     void Update()
     {
-        input = new Vector3(Input.GetAxis("Horizontal")*10, 0, Input.GetAxis("Vertical")*10);
+        
+        
+        Vector3 input = new Vector3(Input.GetAxis("Horizontal")*10, 0, Input.GetAxis("Vertical")*10);
+        /*var angleofInput = Mathf.Atan2(input.x, input.z) * Mathf.Rad2Deg;
+        float cameraRot =  Camera.main.transform.rotation.eulerAngles.y;
+
+        InputplusCamera =
+            new Vector3(input.x *(Mathf.Cos(cameraRot)*10), 0, input.z * (Mathf.Sin(angleofInput + cameraRot)*10));*/
 
         centerofZombies = Vector3.zero;
         foreach (var zomby in Game_Mannger.Instance.Zombies)
@@ -29,6 +36,12 @@ public class InputTargetCamera : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(centerofZombies,centerofZombies+input);
+        Gizmos.DrawLine(centerofZombies,centerofZombies+InputplusCamera);
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(centerofZombies, InputplusCamera);
+        
+        //Gizmos.DrawLine(Camera.main.transform.position.removeY(),centerofZombies);
+        
     }
 }

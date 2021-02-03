@@ -41,6 +41,10 @@ public class Game_Mannger : MonoBehaviour
         {
             // spawn survior
         }
-        
+    }
+
+    public void removeZombieFromList(Zombie zoms)
+    {
+        Zombies.Remove(zoms);
     }
 }
