@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 93d6ed92ce7f3324ab13040cd469686c
+guid: ae7a93b2544d5b34bbc7ee0b7b88c24b
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -45,7 +45,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -57,7 +57,7 @@ ModelImporter:
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15
+    secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
