@@ -9,8 +9,8 @@ public class Zombie : MonoBehaviour
 {
     [Header("Public")]
     public Transform postoWalkTo;
-    public float health = 100;
-    public float MoveForce = 10f;
+    public float health = 3;
+    public float MoveForce = 30f;
     public float RangeOfNextPath = 5f;
 
     [Header("Compontes")]

@@ -10,45 +10,42 @@ public class Survivor : MonoBehaviour
     private int health = 1000;
     private Transform gun;
     [SerializeField] private LayerMask zombielayer;
-    [SerializeField] private Material black;
-    [SerializeField] private Material red;
     [SerializeField] private List<Zombie> _zombiesIsee;
 
     private void Awake()
     {
         gun = transform.GetChild(0);
-        StartCoroutine(ShootZombie());
+        //StartCoroutine(ShootZombieEnum());
     }
 
-    private void Update()
-    { 
-        Zombie zombiethatIWillShoot = zombieIsee();
-        if(zombiethatIWillShoot != null)
-            Shootzombie(zombiethatIWillShoot);
-    }
-
-    IEnumerator ShootZombie()
+    IEnumerator ShootZombieEnum()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
-            //shootzombie();
+            yield return new WaitForSeconds(0.1f);
+            Shootzombie();
+            yield return new WaitForSeconds(0.1f);
+            Shootzombie();
+            yield return new WaitForSeconds(0.1f);
+            Shootzombie();
+            yield return new WaitForSeconds(0.1f);
+            Shootzombie();
+            yield return new WaitForSeconds(3f);
         }
     }
     
 
-    void Shootzombie(Zombie zom)
+    void Shootzombie()
     {
-        gun.GetComponent<MeshRenderer>().material = black;
+        Zombie zom = zombieIsee();
+        if(zom == null) return;
+        Debug.Log("shoot " + zom.name);
+
         var position = zom.transform.position;
         transform.LookAt(new Vector3(position.x,transform.position.y,position.z));
-
-        if (Random.Range(0, 100) > 90)
-        {
-            gun.GetComponent<MeshRenderer>().material = red;
-            zom.takeDamage(1);
-        }
         
+        zom.takeDamage(1);
+
     }
     
 
@@ -64,9 +61,8 @@ public class Survivor : MonoBehaviour
             {
                 if (1 << hit.transform.gameObject.layer == zombielayer)
                 {
-                    Debug.Log(hit.collider.name);
                     _zombiesIsee.Add(hit.transform.GetComponent<Zombie>());
-                    if (dist < hit.distance)
+                    if (dist > hit.distance)
                         closed = hit.transform.GetComponent<Zombie>();
                 }
                     
