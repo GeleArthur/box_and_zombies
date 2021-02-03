@@ -10,50 +10,66 @@ public class Survivor : MonoBehaviour
     private int health = 1000;
     private Transform gun;
     [SerializeField] private LayerMask zombielayer;
-    [SerializeField] private Material black;
-    [SerializeField] private Material red;
+    [SerializeField] private List<Zombie> _zombiesIsee;
 
     private void Awake()
     {
         gun = transform.GetChild(0);
+        //StartCoroutine(ShootZombieEnum());
     }
 
-    private void Update()
+    IEnumerator ShootZombieEnum()
     {
-        List<Zombie> zombiethatIWillShoot = zombieIsee();
-        if(zombiethatIWillShoot.Count != 0)
-            shootzombie(zombiethatIWillShoot[0]);
-    }
-
-    void shootzombie(Zombie zom)
-    {
-        gun.GetComponent<MeshRenderer>().material = black;
-        var position = zom.transform.position;
-        transform.LookAt(new Vector3(position.x,transform.position.y,position.z));
-
-        if (Random.Range(0, 100) > 90)
+        while (true)
         {
-            gun.GetComponent<MeshRenderer>().material = red;
-            zom.takeDamage(1);
+            yield return new WaitForSeconds(0.1f);
+            Shootzombie();
+            yield return new WaitForSeconds(0.1f);
+            Shootzombie();
+            yield return new WaitForSeconds(0.1f);
+            Shootzombie();
+            yield return new WaitForSeconds(0.1f);
+            Shootzombie();
+            yield return new WaitForSeconds(3f);
         }
-        
     }
     
 
-    private List<Zombie> zombieIsee()
+    void Shootzombie()
     {
-        List<Zombie> _zombiesIsee = new List<Zombie>();
+        Zombie zom = zombieIsee();
+        if(zom == null) return;
+        Debug.Log("shoot " + zom.name);
+
+        var position = zom.transform.position;
+        transform.LookAt(new Vector3(position.x,transform.position.y,position.z));
+        
+        zom.takeDamage(1);
+
+    }
+    
+
+    private Zombie zombieIsee()
+    {
+        _zombiesIsee = new List<Zombie>();
+        Zombie closed = null;
+        float dist = Single.PositiveInfinity;
         for (int i = 0; i < Game_Mannger.Instance.Zombies.Count; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(gun.position, Game_Mannger.Instance.Zombies[i].transform.position-gun.position, out hit , 1000))
+            if (Physics.Raycast(transform.position, Game_Mannger.Instance.Zombies[i].transform.position-transform.position, out hit , 1000))
             {
-                if(1<<hit.transform.gameObject.layer == zombielayer )
+                if (1 << hit.transform.gameObject.layer == zombielayer)
+                {
                     _zombiesIsee.Add(hit.transform.GetComponent<Zombie>());
+                    if (dist > hit.distance)
+                        closed = hit.transform.GetComponent<Zombie>();
+                }
+                    
             }
         }
 
-        return _zombiesIsee;
+        return closed;
     }
     
     public void takeDamage(int Damage)
@@ -68,11 +84,6 @@ public class Survivor : MonoBehaviour
     private void OnDrawGizmos()
     {
         if(Game_Mannger.Instance == null) return;
-        List<Zombie> zombiethatIWillShoot = zombieIsee();
 
-        for (int i = 0; i < zombiethatIWillShoot.Count; i++)
-        {
-            Gizmos.DrawLine(gun.position,zombiethatIWillShoot[i].transform.position);
-        }
     }
 }
