@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 268a2175d3385da4e8a1cdbd5e8e690e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - LOUD AND CLEAR PERSONAL USE
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6a96bae8c82b53044b2c6787bf3f079c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
