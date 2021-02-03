@@ -16,6 +16,7 @@ public class Survivor : MonoBehaviour
     private void Awake()
     {
         gun = transform.GetChild(0);
+        StartCoroutine(ShootZombie());
     }
 
     private void Update()
@@ -24,6 +25,16 @@ public class Survivor : MonoBehaviour
         if(zombiethatIWillShoot.Count != 0)
             shootzombie(zombiethatIWillShoot[0]);
     }
+
+    IEnumerator ShootZombie()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            
+        }
+    }
+    
 
     void shootzombie(Zombie zom)
     {
