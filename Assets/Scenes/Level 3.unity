@@ -5204,7 +5204,7 @@ GameObject:
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5980,7 +5980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5855426683190643839, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8616799
+      value: 0.86168
       objectReference: {fileID: 0}
     - target: {fileID: 5855426683190643839, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_LocalRotation.x
@@ -5988,11 +5988,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5855426683190643839, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.38773632
+      value: -0.3877363
       objectReference: {fileID: 0}
     - target: {fileID: 5855426683190643839, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.13433366
+      value: 0.13433363
       objectReference: {fileID: 0}
     - target: {fileID: 5855426683663820000, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_Targets.Array.data[0].target
@@ -6036,7 +6036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5855426684153153716, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8616799
+      value: 0.86168
       objectReference: {fileID: 0}
     - target: {fileID: 5855426684153153716, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6044,11 +6044,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5855426684153153716, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.38773632
+      value: -0.3877363
       objectReference: {fileID: 0}
     - target: {fileID: 5855426684153153716, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.13433366
+      value: 0.13433363
       objectReference: {fileID: 0}
     - target: {fileID: 5855426684153153717, guid: 99aa2fed6f694cb41b2e9501d128e273, type: 3}
       propertyPath: field of view
