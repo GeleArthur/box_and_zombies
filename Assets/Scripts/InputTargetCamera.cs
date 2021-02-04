@@ -13,7 +13,7 @@ public class InputTargetCamera : MonoBehaviour
 
     void Update()
     {
-        
+        if(Game_Mannger.Instance.Zombies.Count == 0) return;
         
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         

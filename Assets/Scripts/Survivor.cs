@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
@@ -10,14 +11,19 @@ public class Survivor : MonoBehaviour
     [SerializeField] private LayerMask zombielayer;
     [SerializeField] private List<Zombie> _zombiesIsee;
     [SerializeField] private Animator gun;
-    [SerializeField] private Transform[] PointToRunTo;
+    [SerializeField] private pointAndCamera[] PointToRunTo;
     [SerializeField] private int AtPoint = 0;
     [SerializeField] private float TimeToMove = 2f;
     [SerializeField] private bool canGetHit = true;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform bulletSpawn;
+    [SerializeField] private CinemachineVirtualCamera cinecamera;
 
+    [Serializable]
     class pointAndCamera
     {
         public Transform point;
+        public Vector3 cameraAngle;
     }
     
     private void Awake()
@@ -25,13 +31,23 @@ public class Survivor : MonoBehaviour
         StartCoroutine(ShootZombieEnum());
     }
 
+    private void Update()
+    {
+        var centerofZombies = Vector3.zero;
+        foreach (var zomby in Game_Mannger.Instance.Zombies)
+        {
+            centerofZombies += zomby.transform.position;
+        }
+
+        centerofZombies /= Game_Mannger.Instance.Zombies.Count;
+        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(centerofZombies.removeY()),0.1f );
+
+    }
+
     IEnumerator ShootZombieEnum()
     {
         while (true)
         {
-            yield return new WaitUntil(() => canGetHit);
-            yield return new WaitForSeconds(0.1f);
-            Shootzombie();
             yield return new WaitForSeconds(0.1f);
             Shootzombie();
             yield return new WaitForSeconds(0.1f);
@@ -56,6 +72,22 @@ public class Survivor : MonoBehaviour
         canGetHit = true;
         yield return null;
     }
+
+    IEnumerator ChangeCamera(Vector3 target)
+    {
+        float elapsedTime = 0;
+        var cinemachineTransposer = cinecamera.GetCinemachineComponent<CinemachineTransposer>();
+        Vector3 ori = cinemachineTransposer.m_FollowOffset;
+        
+        while (elapsedTime < TimeToMove)
+        {
+            elapsedTime += Time.deltaTime;
+            cinemachineTransposer.m_FollowOffset = Vector3.Lerp(ori, target, 1/TimeToMove*elapsedTime);
+            yield return null;
+        }
+        
+        yield return null;
+    }
     
 
     void Shootzombie()
@@ -66,8 +98,10 @@ public class Survivor : MonoBehaviour
 
         var position = zom.transform.position;
         transform.LookAt(new Vector3(position.x,transform.position.y,position.z));
-        
-        zom.takeDamage(1);
+
+        var bullet = Instantiate(bulletPrefab,bulletSpawn.position,Quaternion.identity);
+        bullet.transform.LookAt(zom.transform);
+        //bullet.transform.position = bulletSpawn.position;
 
     }
     
@@ -99,9 +133,12 @@ public class Survivor : MonoBehaviour
         if (canGetHit)
         {
             canGetHit = false;
-            var position = PointToRunTo[AtPoint].position;
+            var position = PointToRunTo[AtPoint].point.position;
+            //cinecamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = PointToRunTo[AtPoint].cameraAngle;
+            
             position.y = 1.75f;
             StartCoroutine(RunAway(transform.position, position));
+            StartCoroutine(ChangeCamera(PointToRunTo[AtPoint].cameraAngle));
             AtPoint++;
         }
     }
@@ -110,5 +147,9 @@ public class Survivor : MonoBehaviour
     {
         if(Game_Mannger.Instance == null) return;
 
+        for (int i = 0; i < Game_Mannger.Instance.Zombies.Count; i++)
+        {
+            Gizmos.DrawRay(transform.position,Game_Mannger.Instance.Zombies[i].transform.position-transform.position);
+        }
     }
 }

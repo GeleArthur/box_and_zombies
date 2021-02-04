@@ -57,7 +57,7 @@ public class Zombie : MonoBehaviour
     private Vector3 GoToPoint()
     {
         //TODO should not happen every frame
-        if (!NavMesh.CalculatePath(transform.position, postoWalkTo.position, NavMesh.AllAreas, navPath))
+        if (!NavMesh.CalculatePath(transform.position.removeY(), postoWalkTo.position, NavMesh.AllAreas, navPath))
             Debug.Log("goal is out of reach");
         waypointCount = 1;
 
@@ -77,7 +77,7 @@ public class Zombie : MonoBehaviour
     private void OnDrawGizmos()
     {
         if(navPath == null) return;
-        if (navPath.corners.Length == 0) return;
+        if(navPath.corners.Length <= 1) return;
         
         for (int i = 0; i < navPath.corners.Length; i++)
         {
