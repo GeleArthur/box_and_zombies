@@ -18,6 +18,9 @@ public class Survivor : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawn;
     [SerializeField] private CinemachineVirtualCamera cinecamera;
+    [SerializeField] private int bulletCount = 4;
+    [SerializeField] private float timeBetweenBullets = 0.1f;
+    [SerializeField] private float reloadTime = 3f;
 
     [Serializable]
     class pointAndCamera
@@ -49,13 +52,12 @@ public class Survivor : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.1f);
-            Shootzombie();
-            yield return new WaitForSeconds(0.1f);
-            Shootzombie();
-            yield return new WaitForSeconds(0.1f);
-            Shootzombie();
-            yield return new WaitForSeconds(3f);
+            for (int i = 0; i < bulletCount; i++)
+            {
+                yield return new WaitForSeconds(timeBetweenBullets);
+                Shootzombie();
+            }
+            yield return new WaitForSeconds(reloadTime);
         }
     }
 
