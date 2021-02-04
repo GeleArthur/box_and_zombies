@@ -28,6 +28,7 @@ public class FollowThis : MonoBehaviour
       
     void Update()
     {
+        if(Game_Mannger.Instance.Zombies.Count == 0) return;
         Vector3 centerofZombies = Vector3.zero;
         foreach (var zomby in Game_Mannger.Instance.Zombies)
         {

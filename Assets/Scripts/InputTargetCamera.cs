@@ -19,9 +19,11 @@ public class InputTargetCamera : MonoBehaviour
         
         angleofInput = (Mathf.Atan2(input.x, input.z));
         cameraRot =  (Camera.main.transform.rotation.eulerAngles.y+90) * Mathf.Deg2Rad;
+
+        var targetvsSur = (Game_Mannger.Instance.survivor.transform.position -transform.position).magnitude;
         
         InputplusCamera = new Vector3(Mathf.Cos(cameraRot+Mathf.PI + angleofInput), 0, 
-            Mathf.Sin(angleofInput + cameraRot)).normalized * (input.magnitude * 10);
+            Mathf.Sin(angleofInput + cameraRot)).normalized * Mathf.Min(targetvsSur,input.magnitude*10);
 
         
 

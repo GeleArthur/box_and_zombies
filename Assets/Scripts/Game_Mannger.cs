@@ -52,5 +52,9 @@ public class Game_Mannger : MonoBehaviour
     public void removeZombieFromList(Zombie zoms)
     {
         Zombies.Remove(zoms);
+        if (Zombies.Count == 0)
+        {
+            LevelManager.Instance.LoadScene(2);
+        }
     }
 }

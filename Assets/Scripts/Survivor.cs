@@ -148,7 +148,6 @@ public class Survivor : MonoBehaviour
             {
                 // YOU WIN
                 //TODO wait for 3 sec?
-                LevelManager.Instance.saveCurrentIndex();
                 LevelManager.Instance.LoadScene(1);
             }
         }

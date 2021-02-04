@@ -81,7 +81,9 @@ public class Zombie : MonoBehaviour
         
         for (int i = 0; i < navPath.corners.Length; i++)
         {
+#if UNITY_EDITOR
             Handles.DrawSolidDisc(navPath.corners[i],Vector3.up, 0.25f);
+            #endif
         }
         
         Gizmos.DrawRay(transform.position.removeY(), (navPath.corners[waypointCount].removeY() - transform.position.removeY()).normalized*MoveForce);
