@@ -133,14 +133,22 @@ public class Survivor : MonoBehaviour
     {
         if (canGetHit)
         {
-            canGetHit = false;
-            var position = PointToRunTo[AtPoint].point.position;
-            //cinecamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = PointToRunTo[AtPoint].cameraAngle;
-            
-            position.y = 1.75f;
-            StartCoroutine(RunAway(transform.position, position));
-            StartCoroutine(ChangeCamera(PointToRunTo[AtPoint].cameraAngle));
-            AtPoint++;
+            if (AtPoint < PointToRunTo.Length)
+            {
+                canGetHit = false;
+                var position = PointToRunTo[AtPoint].point.position;
+                position.y = 1.75f;
+                StartCoroutine(RunAway(transform.position, position));
+                StartCoroutine(ChangeCamera(PointToRunTo[AtPoint].cameraAngle));
+                AtPoint++;
+            }
+            else
+            {
+                // YOU WIN
+                //TODO wait for 3 sec?
+                LevelManager.Instance.saveCurrentIndex();
+                LevelManager.Instance.LoadScene(1);
+            }
         }
     }
 

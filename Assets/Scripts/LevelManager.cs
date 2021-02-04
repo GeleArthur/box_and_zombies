@@ -9,10 +9,9 @@ public class LevelManager : MonoBehaviour
     // singleton stuff
     private static LevelManager _instance;
     public static LevelManager Instance => _instance;
-    
-    
-    private int loadedSceneIndex = 0;
 
+    public int levelindex;
+    
     private void Awake()
     {
         // singleton stuff
@@ -22,30 +21,33 @@ public class LevelManager : MonoBehaviour
         } else {
             _instance = this;
         }
-    }
-
-    void Start()
-    {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadNextScene()
+    public void LoadScene(int a)
     {
-        LoadScene(loadedSceneIndex+1);
+        SceneManager.LoadScene(a);
     }
-    public void LoadScene(string name)
+
+    public void saveCurrentIndex()
     {
-        SceneManager.LoadScene(name);
-        loadedSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        levelindex = SceneManager.GetActiveScene().buildIndex;
     }
-    public void LoadScene(int index)
-    {
-        loadedSceneIndex = index;
-        SceneManager.LoadScene(index);
-    }
+    
     public void ExitGame()
     {
         Application.Quit();
     }
+    
+    /*public void LoadNextLevel()
+    {
+        //var index = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(levelindex + 1);
+        
+        SceneManager.LoadScene(levelindex + 1);
+        levelindex = SceneManager.GetActiveScene().buildIndex;
+    }*/
+    
+
     
 }
