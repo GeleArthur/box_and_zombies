@@ -16,7 +16,8 @@ public class Game_Mannger : MonoBehaviour
     
     [Header("Holders")]
     public GameObject ZombieHolder;
-    
+
+
 
     private void Awake()
     {

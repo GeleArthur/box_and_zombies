@@ -15,6 +15,11 @@ public class Survivor : MonoBehaviour
     [SerializeField] private float TimeToMove = 2f;
     [SerializeField] private bool canGetHit = true;
 
+    class pointAndCamera
+    {
+        public Transform point;
+    }
+    
     private void Awake()
     {
         StartCoroutine(ShootZombieEnum());
@@ -94,7 +99,9 @@ public class Survivor : MonoBehaviour
         if (canGetHit)
         {
             canGetHit = false;
-            StartCoroutine(RunAway(transform.position, PointToRunTo[AtPoint].position));
+            var position = PointToRunTo[AtPoint].position;
+            position.y = 1.75f;
+            StartCoroutine(RunAway(transform.position, position));
             AtPoint++;
         }
     }
