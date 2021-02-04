@@ -20,7 +20,9 @@ public class InputTargetCamera : MonoBehaviour
         angleofInput = (Mathf.Atan2(input.x, input.z));
         cameraRot =  (Camera.main.transform.rotation.eulerAngles.y+90) * Mathf.Deg2Rad;
         
-        InputplusCamera = new Vector3(Mathf.Cos(cameraRot+Mathf.PI + angleofInput), 0, Mathf.Sin(angleofInput + cameraRot)).normalized * 10;
+        InputplusCamera = new Vector3(Mathf.Cos(cameraRot+Mathf.PI + angleofInput), 0, 
+            Mathf.Sin(angleofInput + cameraRot)).normalized * (input.magnitude * 10);
+
         
 
         centerofZombies = Vector3.zero;

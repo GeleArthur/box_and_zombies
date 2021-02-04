@@ -7,10 +7,13 @@ using Random = UnityEngine.Random;
 
 public class Survivor : MonoBehaviour
 {
-    private int health = 1000;
     [SerializeField] private LayerMask zombielayer;
     [SerializeField] private List<Zombie> _zombiesIsee;
     [SerializeField] private Animator gun;
+    [SerializeField] private Transform[] PointToRunTo;
+    [SerializeField] private int AtPoint = 0;
+    [SerializeField] private float TimeToMove = 2f;
+    [SerializeField] private bool canGetHit = true;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class Survivor : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitUntil(() => canGetHit);
             yield return new WaitForSeconds(0.1f);
             Shootzombie();
             yield return new WaitForSeconds(0.1f);
@@ -32,13 +36,27 @@ public class Survivor : MonoBehaviour
             yield return new WaitForSeconds(3f);
         }
     }
+
+    IEnumerator RunAway(Vector3 orgin, Vector3 target)
+    {
+        float elapsedTime = 0;
+        
+        while (transform.position != target)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(orgin, target, 1/TimeToMove*elapsedTime);
+            yield return null;
+        }
+
+        canGetHit = true;
+        yield return null;
+    }
     
 
     void Shootzombie()
     {
         Zombie zom = zombieIsee();
         if(zom == null) return;
-        Debug.Log("shoot " + zom.name);
         gun.SetTrigger("shoot");
 
         var position = zom.transform.position;
@@ -65,19 +83,19 @@ public class Survivor : MonoBehaviour
                     if (dist > hit.distance)
                         closed = hit.transform.GetComponent<Zombie>();
                 }
-                    
             }
         }
 
         return closed;
     }
     
-    public void takeDamage(int Damage)
+    public void takeDamage()
     {
-        health -= Damage;
-        if (health <= 0)
+        if (canGetHit)
         {
-            Debug.Log("Survior is dead");
+            canGetHit = false;
+            StartCoroutine(RunAway(transform.position, PointToRunTo[AtPoint].position));
+            AtPoint++;
         }
     }
 

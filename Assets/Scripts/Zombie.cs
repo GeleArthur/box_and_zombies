@@ -42,8 +42,16 @@ public class Zombie : MonoBehaviour
     {
         rb.AddForce(GoToPoint());
     }
-    
-    
+
+    private void Update()
+    {
+        //Debug.Log(Vector3.Distance(transform.position,Game_Mannger.Instance.survivor.transform.position));
+        if (Vector3.Distance(transform.position,Game_Mannger.Instance.survivor.transform.position) < 3f)
+        {
+            Game_Mannger.Instance.survivor.takeDamage();
+        }
+    }
+
 
     private Vector3 GoToPoint()
     {
@@ -54,7 +62,7 @@ public class Zombie : MonoBehaviour
 
         
         
-        if(navPath.corners.Length == 0) return Vector3.zero;
+        if(navPath.corners.Length <= 1) return Vector3.zero;
 
         if ((transform.position - navPath.corners[waypointCount]).magnitude < RangeOfNextPath)
         {
