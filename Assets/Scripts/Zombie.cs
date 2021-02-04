@@ -45,6 +45,7 @@ public class Zombie : MonoBehaviour
 
     private void Update()
     {
+        if(Game_Mannger.Instance.survivor == null) return;
         //Debug.Log(Vector3.Distance(transform.position,Game_Mannger.Instance.survivor.transform.position));
         if (Vector3.Distance(transform.position,Game_Mannger.Instance.survivor.transform.position) < 3f)
         {

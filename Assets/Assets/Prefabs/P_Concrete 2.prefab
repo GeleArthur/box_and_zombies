@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 7931496231588565525}
   - component: {fileID: 8778571674252317943}
   m_Layer: 0
-  m_Name: DESTROYED ROOF-C
+  m_Name: P_Concrete 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!4 &9104441231620991354
 Transform:
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8435991679277740992}
-  m_LocalRotation: {x: -0, y: 0.375352, z: -0, w: 0.9268823}
+  m_LocalRotation: {x: 0, y: 0.37535086, z: 0, w: 0.9268828}
   m_LocalPosition: {x: 4.47, y: -7.584179, z: 9.03}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
@@ -93,6 +93,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8794201191743247999, guid: 6884252eb2adc7244be17be51ff99373, type: 3}
