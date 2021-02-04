@@ -40,8 +40,9 @@ public class Survivor : MonoBehaviour
         }
 
         centerofZombies /= Game_Mannger.Instance.Zombies.Count;
-        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(centerofZombies.removeY()),0.1f );
-
+        //transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(centerofZombies.removeY()),0.1f );
+        transform.LookAt(centerofZombies.removeY());
+        transform.rotation = Quaternion.Euler(0,transform.rotation.eulerAngles.y,transform.rotation.eulerAngles.z);
     }
 
     IEnumerator ShootZombieEnum()
