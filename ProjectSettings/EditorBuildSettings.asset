@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: d84d2f8e4dd70c34fb5c9a47593d47ea
   - enabled: 1
-    path: Assets/Scenes/Lucas Test Scene.unity
+    path: Assets/Scenes/Level 1.unity
     guid: 508a1de69d718ef4f9fea24e441a6daa
   - enabled: 1
     path: Assets/Scenes/Win.unity
