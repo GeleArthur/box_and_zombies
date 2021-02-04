@@ -35,6 +35,11 @@ public class Game_Mannger : MonoBehaviour
     {
         Zombies = new List<Zombie>();
         Zombies.AddRange(FindObjectsOfType<Zombie>());
+        foreach (Zombie zomby in Zombies)
+        {
+            zomby.transform.parent = ZombieHolder.transform;
+        }
+        
         survivor = FindObjectOfType<Survivor>();
 
         if (survivor == null)
