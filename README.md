@@ -1,3 +1,4 @@
 # box_and_zombies
 
-this is the source code of our unity project for the gamejam. have fun :)
+This is the source code of our unity project for the gamejam. Have fun :)
+https://ddaengaxy.itch.io/over-run-z
